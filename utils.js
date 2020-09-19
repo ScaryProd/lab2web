@@ -1,6 +1,10 @@
 // Create a "close" button and append it to each list item
 var myNodelist = document.getElementsByTagName("LI");
 var i;
+var pokemonValue;
+
+
+
 for (i = 0; i < myNodelist.length; i++) {
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("\u00D7");
@@ -24,13 +28,15 @@ function newElement() {
 
   var li = document.createElement("li");
   var inputValue = document.getElementById("myInput").value;
-  var inputCost = document.getElementById("item-value").value;
-  var newItem={
-    item : inputValue,
-    cost : inputCost
-  };
-  items.push(newItem);
+  
+
   var totalVar = document.getElementById("totalSpan");
+  axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonValue}`).then(response => {
+  const pokemon = response.data
+  // El weight esta en pokemon.weight
+  })
+
+  var inputCost = pokemon.weight;
 
   var t = document.createTextNode(inputValue);
   var cost = document.createTextNode(inputCost);
@@ -40,7 +46,7 @@ function newElement() {
   li.appendChild(t);
   //li.appendChild(tab);
   li.appendChild(costSpan);
-  if (inputValue === '' || inputCost === '') {
+  if (inputValue === '') {
     document.getElementById("myDIV").style.backgroundColor = "red";
   } else {
     document.getElementById("myDIV").style.backgroundColor = "transparent";
